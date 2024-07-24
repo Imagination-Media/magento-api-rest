@@ -101,24 +101,20 @@ class MagentoApi {
      * @returns Promise<any>
      */
     async get(path: string, data: any | null = null): Promise<any> {
-        try {
-            let url = `${this.getUrl()}${path}`
+        let url = `${this.getUrl()}${path}`
 
-            if (data) {
-                let params = {
-                    searchCriteria: data
-                }
-                url += `?${this.parseQueryString(params)}`
-                return await axios.get(url, {
-                    headers: this.getHeaders(url, "GET") as any,
-                })
-            } else {
-                return await axios.get(`${this.getUrl()}${path}`, {
-                    headers: this.getHeaders(url, "GET") as any
-                })
+        if (data) {
+            let params = {
+                searchCriteria: data
             }
-        } catch (error: any) {
-            console.error(error)
+            url += `?${this.parseQueryString(params)}`
+            return await axios.get(url, {
+                headers: this.getHeaders(url, "GET") as any,
+            })
+        } else {
+            return await axios.get(`${this.getUrl()}${path}`, {
+                headers: this.getHeaders(url, "GET") as any
+            })
         }
     }
 
@@ -129,14 +125,10 @@ class MagentoApi {
      * @returns Promise<any>
      */
     async post(path: string, data: any): Promise<any> {
-        try {
-            const url = `${this.getUrl()}${path}`
-            return await axios.post(url, data, {
-                headers: this.getHeaders(url, "POST") as any
-            })
-        } catch (error: any) {
-            console.error(error)
-        }
+        const url = `${this.getUrl()}${path}`
+        return await axios.post(url, data, {
+            headers: this.getHeaders(url, "POST") as any
+        })
     }
 
     /**
@@ -146,14 +138,10 @@ class MagentoApi {
      * @returns Promise<any>
      */
     async put(path: string, data: any): Promise<any> {
-        try {
-            const url = `${this.getUrl()}${path}`
-            return await axios.put(url, data, {
-                headers: this.getHeaders(url, "PUT") as any
-            })
-        } catch (error: any) {
-            console.error(error)
-        }
+        const url = `${this.getUrl()}${path}`
+        return await axios.put(url, data, {
+            headers: this.getHeaders(url, "PUT") as any
+        })
     }
 
     /**
@@ -162,14 +150,10 @@ class MagentoApi {
      * @returns Promise<any>
      */
     async delete(path: string): Promise<any> {
-        try {
-            const url = `${this.getUrl()}${path}`
-            return await axios.delete(url, {
-                headers: this.getHeaders(url, "DELETE") as any
-            })
-        } catch (error: any) {
-            console.error(error)
-        }
+        const url = `${this.getUrl()}${path}`
+        return await axios.delete(url, {
+            headers: this.getHeaders(url, "DELETE") as any
+        })
     }
 
     /**
