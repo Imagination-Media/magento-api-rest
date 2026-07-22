@@ -145,6 +145,42 @@ let params = {
     "current_page": 1
 }
 ```
+Or, if you need pass more query string then searchCriteria:
+```js
+let params = {
+    "filter_groups": [
+        {
+            "filters": [
+                {
+                    "field": "created_at",
+                    "value": "2019-08-03 11:22:47",
+                    "condition_type": "from"
+                }
+            ]
+        },
+        {
+            "filters": [
+                {
+                    "field": "created_at",
+                    "value": "2020-08-03 11:22:47",
+                    "condition_type": "to"
+                }
+            ]
+        }
+    ],
+    "sort_orders": [
+        {
+            "field": "created_at",
+            "direction": "desc"
+        }
+    ],
+    "page_size": 200,
+    "current_page": 1,
+    "params": {
+        "extra_query": "value"
+    }
+}
+```
 Or, you can use the parser to write the above query as:
 ```js
 let params = {

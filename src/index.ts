@@ -104,8 +104,13 @@ class MagentoApi {
         let url = `${this.getUrl()}${path}`
 
         if (data) {
-            let params = {
-                searchCriteria: data
+            let params = {}
+            if (Object.prototype.hasOwnProperty.call(data, "searchCriteria")) {
+                params = data
+            } else {
+                params = {
+                    searchCriteria: data
+                }
             }
             url += `?${this.parseQueryString(params)}`
             return await axios.get(url, {
