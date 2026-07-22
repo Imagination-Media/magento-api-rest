@@ -145,6 +145,44 @@ let params = {
     "current_page": 1
 }
 ```
+Or, if you need pass more query string then searchCriteria:
+```js
+let queryData = {
+    "filter_groups": [
+        {
+            "filters": [
+                {
+                    "field": "created_at",
+                    "value": "2019-08-03 11:22:47",
+                    "condition_type": "from"
+                }
+            ]
+        },
+        {
+            "filters": [
+                {
+                    "field": "created_at",
+                    "value": "2020-08-03 11:22:47",
+                    "condition_type": "to"
+                }
+            ]
+        }
+    ],
+    "sort_orders": [
+        {
+            "field": "created_at",
+            "direction": "desc"
+        }
+    ],
+    "page_size": 200,
+    "current_page": 1,
+    "params": {
+        "extra_query": "value"
+    }
+}
+```
+Any keys nested under `params` are removed from `searchCriteria` and appended to the query string as top-level params instead (e.g. `?searchCriteria[...]=...&extra_query=value`).
+
 Or, you can use the parser to write the above query as:
 ```js
 let params = {
@@ -177,11 +215,11 @@ let params = {
 
 To get more information as to how to form search queries, use the [following reference](https://devdocs.magento.com/guides/v2.3/rest/performing-searches.html).
 
-> If you want to use the above object in a request,
+> If you want to use one of the above objects in a request,
 ```js
 async function getOrders () {
     try {
-        let { data } = await client.get('orders', params);
+        let { data } = await client.get('orders', queryData);
         // Response Handling
     } catch (err) {
         // Error Handling
